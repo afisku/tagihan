@@ -1,0 +1,6 @@
+export XAMPP_HOME="/Applications/XAMPP"
+export PATH="$XAMPP_HOME/bin:${PATH}"
+export PATH="/usr/local/opt/php@8.0/bin:$PATH"
+EXPORT PATH="/usr/local/opt/php@8.0/sbin:$PATH"
+export PATH=$PATH:~/.composer/vendor/bin
+export PATH=/usr/local/share/npm/bin:$PATH

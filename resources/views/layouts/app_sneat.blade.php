@@ -63,6 +63,7 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('sneat') }}/assets/js/config.js"></script>
+    <link rel="stylesheet" href="{{ asset('font/css/all.min.css') }}">
   </head>
 
   <body>
@@ -141,7 +142,7 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item {{ \Route::is('operator.beranda') ? 'active' : '' }}">
               <a href="{{ route('operator.beranda') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Beranda</div>
@@ -149,7 +150,7 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item">
+            <li class="menu-item {{ \Route::is('user.*') ? 'active' : '' }}">
               <a href="{{ route('user.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Basic">Data User</div>

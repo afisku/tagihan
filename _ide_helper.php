@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.51.0.
+ * Generated for Laravel 9.52.0.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -2529,7 +2529,7 @@
          * Check the result of a condition.
          *
          * @param string $name
-         * @param array $parameters
+         * @param mixed $parameters
          * @return bool 
          * @static 
          */ 
@@ -3294,7 +3294,7 @@
                     /**
          * Assert if a job was pushed a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -3344,7 +3344,7 @@
                     /**
          * Assert if a job was pushed synchronously a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -3383,7 +3383,7 @@
                     /**
          * Assert if a job was pushed after the response was sent a number of times.
          *
-         * @param string $command
+         * @param string|\Closure $command
          * @param int $times
          * @return void 
          * @static 
@@ -4183,6 +4183,33 @@
                         return $instance->macroCall($method, $parameters);
         }
                     /**
+         * Get a lock instance.
+         *
+         * @param string $name
+         * @param int $seconds
+         * @param string|null $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function lock($name, $seconds = 0, $owner = null)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->lock($name, $seconds, $owner);
+        }
+                    /**
+         * Restore a lock instance using the owner identifier.
+         *
+         * @param string $name
+         * @param string $owner
+         * @return \Illuminate\Contracts\Cache\Lock 
+         * @static 
+         */ 
+        public static function restoreLock($name, $owner)
+        {
+                        /** @var \Illuminate\Cache\FileStore $instance */
+                        return $instance->restoreLock($name, $owner);
+        }
+                    /**
          * Remove all items from the cache.
          *
          * @return bool 
@@ -4225,33 +4252,6 @@
         {
                         /** @var \Illuminate\Cache\FileStore $instance */
                         return $instance->getPrefix();
-        }
-                    /**
-         * Get a lock instance.
-         *
-         * @param string $name
-         * @param int $seconds
-         * @param string|null $owner
-         * @return \Illuminate\Contracts\Cache\Lock 
-         * @static 
-         */ 
-        public static function lock($name, $seconds = 0, $owner = null)
-        {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->lock($name, $seconds, $owner);
-        }
-                    /**
-         * Restore a lock instance using the owner identifier.
-         *
-         * @param string $name
-         * @param string $owner
-         * @return \Illuminate\Contracts\Cache\Lock 
-         * @static 
-         */ 
-        public static function restoreLock($name, $owner)
-        {
-                        /** @var \Illuminate\Cache\FileStore $instance */
-                        return $instance->restoreLock($name, $owner);
         }
          
     }
@@ -10327,6 +10327,7 @@
             /**
      * 
      *
+     * @method static string|null getContentTypeFormat()
      * @see \Illuminate\Http\Request
      */ 
         class Request {
@@ -10733,7 +10734,6 @@
                     /**
          * Gets the Session.
          *
-         * @throws SessionNotFoundException When session is not set properly
          * @static 
          */ 
         public static function getSession()
@@ -11033,7 +11033,6 @@
                     /**
          * Gets the list of trusted proxies.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getTrustedProxies()
@@ -11065,7 +11064,6 @@
                     /**
          * Gets the list of trusted host patterns.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getTrustedHosts()
@@ -11480,7 +11478,6 @@
                     /**
          * Gets the mime types associated with the format.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getMimeTypes($format)
@@ -11500,7 +11497,7 @@
                     /**
          * Associates a format with mime types.
          *
-         * @param string|string[] $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
+         * @param string|array $mimeTypes The associated mime types (the preferred one must be the first as it will be used as the content type)
          * @static 
          */ 
         public static function setFormat($format, $mimeTypes)
@@ -11536,26 +11533,14 @@
                         return $instance->setRequestFormat($format);
         }
                     /**
-         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
+         * Gets the format associated with the request.
          *
-         * @deprecated since Symfony 6.2, use getContentTypeFormat() instead
          * @static 
          */ 
         public static function getContentType()
         {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->getContentType();
-        }
-                    /**
-         * Gets the usual name of the format associated with the request's media type (provided in the Content-Type header).
-         *
-         * @see Request::$formats
-         * @static 
-         */ 
-        public static function getContentTypeFormat()
-        {            //Method inherited from \Symfony\Component\HttpFoundation\Request         
-                        /** @var \Illuminate\Http\Request $instance */
-                        return $instance->getContentTypeFormat();
         }
                     /**
          * Sets the default locale.
@@ -11661,7 +11646,6 @@
          *
          * @param bool $asResource If true, a resource will be returned
          * @return string|resource 
-         * @psalm-return ($asResource is true ? resource : string)
          * @static 
          */ 
         public static function getContent($asResource = false)
@@ -11718,7 +11702,6 @@
                     /**
          * Gets a list of languages acceptable by the client browser ordered in the user browser preferences.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getLanguages()
@@ -11729,7 +11712,6 @@
                     /**
          * Gets a list of charsets acceptable by the client browser in preferable order.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getCharsets()
@@ -11740,7 +11722,6 @@
                     /**
          * Gets a list of encodings acceptable by the client browser in preferable order.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getEncodings()
@@ -11751,7 +11732,6 @@
                     /**
          * Gets a list of content types acceptable by the client browser in preferable order.
          *
-         * @return string[] 
          * @static 
          */ 
         public static function getAcceptableContentTypes()
@@ -15548,6 +15528,21 @@
         {
                         /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
                         return $instance->temporaryUrl($path, $expiration, $options);
+        }
+                    /**
+         * Get a temporary upload URL for the file at the given path.
+         *
+         * @param string $path
+         * @param \DateTimeInterface $expiration
+         * @param array $options
+         * @return array 
+         * @throws \RuntimeException
+         * @static 
+         */ 
+        public static function temporaryUploadUrl($path, $expiration, $options = [])
+        {
+                        /** @var \Illuminate\Filesystem\FilesystemAdapter $instance */
+                        return $instance->temporaryUploadUrl($path, $expiration, $options);
         }
                     /**
          * Get an array of all files in a directory.
@@ -21191,6 +21186,45 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Query\Builder $instance */
                                 return $instance->from($table, $as);
+            }
+             
+                /**
+             * Add an index hint to suggest a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function useIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->useIndex($index);
+            }
+             
+                /**
+             * Add an index hint to force a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function forceIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->forceIndex($index);
+            }
+             
+                /**
+             * Add an index hint to ignore a query index.
+             *
+             * @param string $index
+             * @return \Illuminate\Database\Query\Builder 
+             * @static 
+             */ 
+            public static function ignoreIndex($index)
+            {
+                                /** @var \Illuminate\Database\Query\Builder $instance */
+                                return $instance->ignoreIndex($index);
             }
              
                 /**
