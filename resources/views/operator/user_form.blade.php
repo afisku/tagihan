@@ -7,32 +7,33 @@
                 <h5 class="card-header"> Form User </h5>
                 <div class="card-body">
                     {!! Form::model($model, ['route' => $route,'method' => $method]) !!}
+                    @csrf
                         <div class="form-group"> 
                           <label for="name">Name</label>
                           {!! Form::text('name', null, ['class' => 'form-control','autofocus']) !!}
                           <span class="text-danger">{{ $errors->first('name') }}</span>
                         </div>
 
-                        <div class="form-group mt-3">
+                        <div class="form-group mt-2">
                             <label for="email">Email</label>
                             {!! Form::text('email', null, ['class' => 'form-control']) !!}
                             <span class="text-danger">{{ $errors->first('email') }}</span>
                           </div>
 
-                          <div class="form-group mt-3">
+                          <div class="form-group mt-2">
                             <label for="password">Password</label>
                             {!! Form::password('password', ['class' => 'form-control']) !!}
                             <span class="text-danger">{{ $errors->first('password') }}</span>
                           </div>
 
-                          <div class="form-group mt-3">
+                          <div class="form-group mt-2">
                             <label for="nohp">No Hp</label>
                             {!! Form::text('nohp', null, ['class' => 'form-control']) !!}
                             <span class="text-danger">{{ $errors->first('nohp') }}</span>
                           </div>
 
                           
-                          <div class="form-group mt-3">
+                          <div class="form-group mt-2">
                             <label for="akses">Hak Akses</label>
                             {!! Form::select(
                                 'akses',
