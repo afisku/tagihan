@@ -58,7 +58,7 @@ class UserController extends Controller
         $data = [
             'model' => \App\Models\User::findOrFail($id), 
              'method' => 'PUT',
-             'route' => ['user.update'. $id],
+             'route' => ['user.update', $id],
              'button' => 'UPDATE'
         ];
         return view('operator.user_form', $data); 
@@ -95,8 +95,6 @@ class UserController extends Controller
             flash('data tidak bisa dihapus')->error();
             return back();
         }
-
-
         $model->delete();
         flash('data berhasil dihapus');
         return back();
